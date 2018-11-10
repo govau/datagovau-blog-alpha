@@ -76,5 +76,6 @@ package-lock.json
 package-lock.json
 yarn.lock
 
-# Contentful errors
+# Contentful
+contentful/
 contentful-import-error-*
