@@ -20,6 +20,7 @@ jobs:
             - ./src/_uikit.scss
             - ./.cache
       - run: yarn run build
+      - run: rm -rf node_modules pancake src bin
       - run: cf version
       - run: cf login -a $CF_STAG_API -o $CF_ORG -s $CF_STAG_SPACE -u $CF_STAG_USER -p $CF_STAG_PASS
       - run: tree -c
@@ -32,10 +33,10 @@ jobs:
 
     steps:
       - checkout
-      - run: rm -rf node_modules
+      - run: rm -rf node_modules             # Clean up before build
       - run: yarn install
       - run: yarn run build
-      - run: rm -rf node_modules
+      - run: rm -rf node_modules pancake src bin
       - run: cf version
       - run: cf login -a $CF_PROD_API -o $CF_ORG -s $CF_PROD_SPACE -u $CF_PROD_USER -p $CF_PROD_PASS
       - run: tree -c
