@@ -75,3 +75,6 @@ designsystem.min.js
 package-lock.json
 package-lock.json
 yarn.lock
+
+# Contentful errors
+contentful-import-error-*
