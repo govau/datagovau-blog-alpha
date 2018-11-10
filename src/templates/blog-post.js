@@ -2,6 +2,7 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import get from 'lodash/get'
 import Img from 'gatsby-image'
+import AUheading from '@gov.au/headings';
 
 import heroStyles from '../components/hero.module.css'
 
@@ -11,18 +12,16 @@ class BlogPostTemplate extends React.Component {
     const siteTitle = get(this.props, 'data.site.siteMetadata.title')
 
     return (
-      <div style={{ background: '#fff' }}>
-        <Helmet title={`${post.title} | ${siteTitle}`} />
+      <main className="au-body">
+        <div className="container">
+        <div className="row">
+        <div className="col-md-12">
         <div className={heroStyles.hero}>
-          <Img className={heroStyles.heroImage} alt={post.title} sizes={post.heroImage.sizes} />
+          <Img className="au-responsive-media-img" alt={post.title} sizes={post.heroImage.sizes} />
         </div>
-        <div className="wrapper">
-          <h1 className="section-headline">{post.title}</h1>
-          <p
-            style={{
-              display: 'block',
-            }}
-          >
+        <div className="au-body">
+          <AUheading size="xxl" level="1">{post.title}</AUheading>
+          <p>
             {post.publishDate}
           </p>
           <div
@@ -31,7 +30,10 @@ class BlogPostTemplate extends React.Component {
             }}
           />
         </div>
-      </div>
+        </div>
+        </div>
+        </div>
+      </main>
     )
   }
 }

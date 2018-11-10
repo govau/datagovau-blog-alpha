@@ -1,0 +1,18 @@
+// main.scss
+// ---------
+
+// Loaded via layouts/index.scss, after variables and designsystem
+
+body {
+  margin: 0;
+}
+
+.main-nav-wrapper {
+  .au-main-nav__content {
+    float: left;
+
+    + .au-main-nav__content {
+      float: right;
+    }
+  }
+}

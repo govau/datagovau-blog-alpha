@@ -1,0 +1,11 @@
+// main.scss
+
+$theme-purple: #320E3B;
+
+$AU-color-foreground-action: $theme-purple;
+
+$AU-colordark-background: $theme-purple;
+
+// Import the design system components
+@import "../assets/sass/designsystem.scss";
+@import "../assets/sass/main.scss";

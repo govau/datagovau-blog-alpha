@@ -1,8 +1,7 @@
 import React from 'react'
 import get from 'lodash/get'
-import Helmet from 'react-helmet'
-import Hero from '../components/hero'
 import ArticlePreview from '../components/article-preview'
+import AUheading from '@gov.au/headings'
 
 class RootIndex extends React.Component {
   render() {
@@ -11,22 +10,22 @@ class RootIndex extends React.Component {
     const [author] = get(this, 'props.data.allContentfulPerson.edges')
 
     return (
-      <div style={{ background: '#fff' }}>
-        <Helmet title={siteTitle} />
-        <Hero data={author.node} />
-        <div className="wrapper">
-          <h2 className="section-headline">Recent articles</h2>
-          <ul className="article-list">
+      <main className="au-body">
+        <div>
+          <div className="container">
+          <AUheading level="2" size="xxxl">Recent articles</AUheading>
+          <div className="row">
             {posts.map(({ node }) => {
               return (
-                <li key={node.slug}>
+                <div className="col-md-4" key={node.slug}>
                   <ArticlePreview article={node} />
-                </li>
+                </div>
               )
             })}
-          </ul>
+          </div>
+          </div>
         </div>
-      </div>
+      </main>
     )
   }
 }

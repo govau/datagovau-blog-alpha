@@ -1,16 +1,25 @@
 import React from 'react'
-import Link from 'gatsby-link'
-import styles from './navigation.module.css'
+import AUmainNav, { AUmainNavContent } from '@gov.au/main-nav'
 
 export default () => (
-  <nav role="navigation">
-    <ul className={styles.navigation}>
-      <li className={styles.navigationItem}>
-        <Link to="/">Home</Link>
-      </li>
-      <li className={styles.navigationItem}>
-        <Link to="/blog/">Blog</Link>
-      </li>
-    </ul>
-  </nav>
+  <AUmainNav>
+    <div className="container">
+    <div className="row">
+    <div className="col-md-12 main-nav-wrapper">
+    <AUmainNavContent items={[
+{ link: '/', text: 'Home', active: isLinkActive("/") },
+{ link: '/about', text: 'About', active: isLinkActive("/about") }
+    ]} />
+    <AUmainNavContent items={[
+{ link: 'https://search.data.gov.au/', text: 'data.gov.au' }
+    ]} />
+    </div>
+    </div>
+    </div>
+  </AUmainNav>
 )
+
+const isLinkActive = link => {
+  return link === location.pathname;
+};
+

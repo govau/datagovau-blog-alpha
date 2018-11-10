@@ -29,10 +29,6 @@ bower_components
 # node-waf configuration
 .lock-wscript
 
-# Package manager locks
-yarn.lock
-package-json.lock
-
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
 
@@ -69,3 +65,13 @@ public
 
 # contentful config file
 .contentful.json
+
+# Pancake
+pancake/
+designsystem.scss
+designsystem.min.js
+
+# Packman files
+package-lock.json
+package-lock.json
+yarn.lock
