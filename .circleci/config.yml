@@ -2,7 +2,7 @@ version: 2
 jobs:
   deploy-staging:
     docker:
-      - image: circleci/node:8.11.3 # NodeLTS as of 06/2018
+      - image: govau/cf-cli
 
     steps:
       - checkout
