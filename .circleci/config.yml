@@ -19,6 +19,7 @@ jobs:
             - ./src/_uikit.min.js
             - ./src/_uikit.scss
             - ./.cache
+      - run: yarn run setup
       - run: yarn run build
       - run: rm -rf node_modules pancake src bin
       - run: cf version
@@ -35,6 +36,7 @@ jobs:
       - checkout
       - run: rm -rf node_modules             # Clean up before build
       - run: yarn install
+      - run: yarn run setup
       - run: yarn run build
       - run: rm -rf node_modules pancake src bin
       - run: cf version
