@@ -2,7 +2,7 @@ version: 2
 jobs:
   deploy-staging:
     docker:
-      - image: govau/cf-cli
+      - image: circleci/node:8.11.3
 
     steps:
       - checkout
@@ -22,6 +22,12 @@ jobs:
       - run: yarn run setup
       - run: yarn run build
       - run: rm -rf node_modules pancake src bin
+      - run: sudo apt-get install apt-transport-https
+      - run: wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+      - run: echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+      - run: sudo apt-get update
+      - run: sudo apt-get install tree
+      - run: sudo apt-get install cf-cli
       - run: cf version
       - run: cf login -a $CF_STAG_API -o $CF_ORG -s $CF_STAG_SPACE -u $CF_STAG_USER -p $CF_STAG_PASS
       - run: tree -c
@@ -39,6 +45,12 @@ jobs:
       - run: yarn run setup
       - run: yarn run build
       - run: rm -rf node_modules pancake src bin
+      - run: sudo apt-get install apt-transport-https
+      - run: wget -q -O - https://packages.cloudfoundry.org/debian/cli.cloudfoundry.org.key | sudo apt-key add -
+      - run: echo "deb https://packages.cloudfoundry.org/debian stable main" | sudo tee /etc/apt/sources.list.d/cloudfoundry-cli.list
+      - run: sudo apt-get update
+      - run: sudo apt-get install tree
+      - run: sudo apt-get install cf-cli
       - run: cf version
       - run: cf login -a $CF_PROD_API -o $CF_ORG -s $CF_PROD_SPACE -u $CF_PROD_USER -p $CF_PROD_PASS
       - run: tree -c
