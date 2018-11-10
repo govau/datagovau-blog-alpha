@@ -68,11 +68,9 @@
   "scripts": {
     "build": "gatsby build",
     "cleanup-repository": "rimraf bin contentful && npm uninstall contentful-import chalk inquirer rimraf ",
-    "deploy": "gatsby build --prefix-paths && gh-pages -d public -r 'ssh://git@github.com/gordjw/contentful-test'",
     "dev": "gatsby develop",
     "fix-semi": "eslint --quiet --ignore-pattern node_modules --ignore-pattern public --parser babel-eslint --no-eslintrc --rule '{\"semi\": [2, \"never\"], \"no-extra-semi\": [2]}' --fix *.js bin/*.js",
     "format": "prettier --trailing-comma es5 --no-semi --single-quote --write 'src/**/*.js' 'src/**/*.md' 'bin/*.js'",
-    "heroku-postbuild": "gatsby build",
     "lint": "eslint --ext .js,.jsx --ignore-pattern public .",
     "postinstall": "node ./bin/hello.js",
     "setup": "node ./bin/setup.js",
