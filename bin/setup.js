@@ -60,7 +60,7 @@ inquirer
     // env vars are given precedence followed by args provided to the setup
     // followed by input given to prompts displayed by the setup script
     spaceId = CONTENTFUL_SPACE_ID || argv.spaceId || spaceId
-    managementToken = CONTENTFUL_MANAGEMENT_ID || argv.managementToken || managementToken
+    managementToken = CONTENTFUL_MANAGEMENT_TOKEN || argv.managementToken || managementToken
     deliveryToken =
       CONTENTFUL_DELIVERY_TOKEN || argv.deliveryToken || deliveryToken
 
