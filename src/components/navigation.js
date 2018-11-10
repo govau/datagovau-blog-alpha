@@ -20,6 +20,7 @@ export default () => (
 )
 
 const isLinkActive = link => {
-  return link === location.pathname;
+  return false;
+  //return link === location.pathname;
 };
 

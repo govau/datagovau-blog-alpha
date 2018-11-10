@@ -1,0 +1,55 @@
+version: 2
+jobs:
+  deploy-staging:
+    docker:
+      - image: circleci/node:8.11.3 # NodeLTS as of 06/2018
+
+    steps:
+      - checkout
+      - restore_cache:                       # Save time by reusing node_modules cache
+          name: Restore Yarn Package Cache
+          keys:
+            - m3-yarn-packages-lock-{{ checksum "yarn.lock" }}
+      - run: yarn install --cache-folder ./.cache
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: m3-yarn-packages-lock-{{ checksum "yarn.lock" }}
+          paths:
+            - ./node_modules
+            - ./src/_uikit.min.js
+            - ./src/_uikit.scss
+            - ./.cache
+      - run: yarn run build
+      - run: cf version
+      - run: cf login -a $CF_STAG_API -o $CF_ORG -s $CF_STAG_SPACE -u $CF_STAG_USER -p $CF_STAG_PASS
+      - run: tree -c
+      - run: cf zero-downtime-push datagovau-blog -f ./.deploy/manifest-staging.yml
+
+
+  deploy-prod:
+    docker:
+      - image: circleci/node:8.11.3
+
+    steps:
+      - checkout
+      - run: rm -rf node_modules
+      - run: yarn install
+      - run: yarn run build
+      - run: rm -rf node_modules
+      - run: cf version
+      - run: cf login -a $CF_PROD_API -o $CF_ORG -s $CF_PROD_SPACE -u $CF_PROD_USER -p $CF_PROD_PASS
+      - run: tree -c
+      - run: cf zero-downtime-push datagovau-blog -f ./.deploy/manifest-production.yml
+
+workflows:
+  version: 2
+  deploying:
+    jobs:
+      - deploy-staging:
+          filters:
+            branches:
+              only: develop
+      #- deploy-prod:
+      #    filters:
+      #      branches:
+      #        only: master
